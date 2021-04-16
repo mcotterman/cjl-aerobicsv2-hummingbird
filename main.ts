@@ -85,13 +85,14 @@ Allows RMB to set variables that can then be read by loops to update StringMap
 
 const rmbVars = [
     {key:'g1p1p1',val:'90'},
+    {key:'g1p2p1',val:'90'},
     {key:'g1bp1',val:'500'},
     {key:'g1p1p2',val:'90'},
+    {key:'g1p2p2',val:'90'},
     {key:'g1bp2',val:'500'},
-    {key:'g2p2p1',val:'90'},
-    {key:'g2bp1',val:'500'},
-    {key:'g2p2p2',val:'90'},
-    {key:'g2bp2',val:'500'}
+    {key:'g1p1p3',val:'90'},
+    {key:'g1p2p3',val:'90'},
+    {key:'g1bp3',val:'500'},
 ];
 
 let isRunning = false;
@@ -365,23 +366,28 @@ input.onButtonPressed(Button.A, function () {
 basic.forever(function () {
     if(isRunning) {
         hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g1p1p1")))
+        hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g1p2p1")))
         basic.pause(parseInt(getRmbVar("g1bp1")));
         hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g1p1p2")))
+        hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g1p2p2")))
         basic.pause(parseInt(getRmbVar("g1bp2")));
+        hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g1p1p3")))
+        hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g1p2p3")))
+        basic.pause(parseInt(getRmbVar("g1bp3")));
     } else {
         basic.pause(500);
         // Add any position cleanup for the stop state here
     }
 })
 
-basic.forever(function () {
-    if(isRunning) {
-        hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g2p2p1")))
-        basic.pause(parseInt(getRmbVar("g2bp1")));
-        hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g2p2p2")))
-        basic.pause(parseInt(getRmbVar("g2bp2")));
-    } else {
-        basic.pause(500);
-        // Add any position cleanup for the stop state here
-    }
-})
+// basic.forever(function () {
+//     if(isRunning) {
+//         hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g2p2p1")))
+//         basic.pause(parseInt(getRmbVar("g2bp1")));
+//         hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g2p2p2")))
+//         basic.pause(parseInt(getRmbVar("g2bp2")));
+//     } else {
+//         basic.pause(500);
+//         // Add any position cleanup for the stop state here
+//     }
+// })
