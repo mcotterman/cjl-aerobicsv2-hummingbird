@@ -371,9 +371,6 @@ basic.forever(function () {
         hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g1p1p2")))
         hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g1p2p2")))
         basic.pause(parseInt(getRmbVar("g1bp2")));
-        hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g1p1p3")))
-        hummingbird.setPositionServo(FourPort.One,parseInt(getRmbVar("g1p2p3")))
-        basic.pause(parseInt(getRmbVar("g1bp3")));
     } else {
         basic.pause(500);
         // Add any position cleanup for the stop state here
