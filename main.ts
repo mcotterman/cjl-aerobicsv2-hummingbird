@@ -378,6 +378,8 @@ basic.forever(function () {
     } else {
         basic.pause(500);
         // Add any position cleanup for the stop state here
+        controlServo('1', 'p', 10);
+        controlServo('2', 'p', 20);
     }
 })
 
