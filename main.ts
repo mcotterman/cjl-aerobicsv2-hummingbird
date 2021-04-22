@@ -408,3 +408,5 @@ basic.forever(function () {
 //         // Add any position cleanup for the stop state here
 //     }
 // })
+
+basic.showString(mbId);
