@@ -121,7 +121,8 @@ let servos = [
         pin: FourPort.One,
         state: 0,
         min: 0,
-        max: 180
+        max: 180,
+        invert: 0
     },
         {
         port: "2",
@@ -129,7 +130,8 @@ let servos = [
         stype: "p",
         state: 0,
         min: 0,
-        max: 180
+        max: 180,
+        invert: 0
     },
     {
         port: "3",
@@ -137,7 +139,8 @@ let servos = [
         stype: "p",
         state: 0,
         min: 0,
-        max: 180
+        max: 180,
+        invert: 0
     },
     {
         port: "4",
@@ -145,7 +148,8 @@ let servos = [
         stype: "p",
         state: 0,
         min: 0,
-        max: 180
+        max: 180,
+        invert: 0
     }
 ]
 hummingbird.startHummingbird()
@@ -200,7 +204,7 @@ function controlServo(id: string, stype: string, newState: number) {
     })
     if(foundServo) {
         if(newState != foundServo.state) {
-            newState = Math.constrain(newState, foundServo.min, foundServo.max)
+            newState = Math.constrain((foundServo.invert == 1 ? 180 - newState : newState), foundServo.min, foundServo.max)
             if(stype == "p") {
                 hummingbird.setPositionServo(foundServo.pin, newState)
             } else {
