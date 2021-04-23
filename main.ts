@@ -4,8 +4,58 @@ radio.onReceivedString(function (receivedString) {
     handleMessage(receivedString);
     // basic.showString(receivedString);
 })
+
 radio.setGroup(27)
 // led.enable(false)
+
+/*
+    Servo List
+    You do not need to add or remove any servos, but you can alter the max/min if needed
+
+    stype: s (position) | c (continuous rotation)
+    max/min: Clamp rotation speed or position
+        rotation extremes: full reverse = -100, full forward = 100
+        position extremes: 0 - 180
+*/
+let servos = [
+    {
+        port: "1",
+        stype: "p",
+        pin: FourPort.One,
+        state: 0,
+        min: 10,
+        max: 150,
+        invert: false
+    },
+        {
+        port: "2",
+        pin: FourPort.Two,
+        stype: "p",
+        state: 0,
+        min: 10,
+        max: 150,
+        invert: false
+    },
+    {
+        port: "3",
+        pin: FourPort.Three,
+        stype: "p",
+        state: 0,
+        min: 10,
+        max: 150,
+        invert: false
+    },
+    {
+        port: "4",
+        pin: FourPort.Four,
+        stype: "p",
+        state: 0,
+        min: 10,
+        max: 150,
+        invert: false
+    }
+]
+
 let leds = [
     {
         port: "1",
@@ -105,53 +155,7 @@ function getRmbVar (key: string) {
 }
 
 
-/*
-    Servo List
-    You do not need to add or remove any servos, but you can alter the max/min if needed
 
-    stype: s (position) | c (continuous rotation)
-    max/min: Clamp rotation speed or position
-        rotation extremes: full reverse = -100, full forward = 100
-        position extremes: 0 - 180
-*/
-let servos = [
-    {
-        port: "1",
-        stype: "p",
-        pin: FourPort.One,
-        state: 0,
-        min: 0,
-        max: 180,
-        invert: 0
-    },
-        {
-        port: "2",
-        pin: FourPort.Two,
-        stype: "p",
-        state: 0,
-        min: 0,
-        max: 180,
-        invert: 0
-    },
-    {
-        port: "3",
-        pin: FourPort.Three,
-        stype: "p",
-        state: 0,
-        min: 0,
-        max: 180,
-        invert: 0
-    },
-    {
-        port: "4",
-        pin: FourPort.Four,
-        stype: "p",
-        state: 0,
-        min: 0,
-        max: 180,
-        invert: 0
-    }
-]
 hummingbird.startHummingbird()
 let debug = 0;
 
@@ -204,7 +208,7 @@ function controlServo(id: string, stype: string, newState: number) {
     })
     if(foundServo) {
         if(newState != foundServo.state) {
-            newState = Math.constrain((foundServo.invert == 1 ? 180 - newState : newState), foundServo.min, foundServo.max)
+            newState = Math.constrain((foundServo.invert ? 180 - newState : newState), foundServo.min, foundServo.max)
             if(stype == "p") {
                 hummingbird.setPositionServo(foundServo.pin, newState)
             } else {
